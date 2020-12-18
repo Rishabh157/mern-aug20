@@ -1,0 +1,42 @@
+.bg-banner{
+    width: 100vw;
+    height: 35vh;
+    background-image: url('https://images.unsplash.com/photo-1581284609034-6468630a744e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80');
+    background-position-y: -150px;
+
+}
+
+.circle{    
+    width: 200px;
+    height: 200px;
+    border-radius: 150px;
+    overflow: hidden;
+    padding: 3px;
+    border: 5px double #fff;
+}
+
+.positioned{
+    /* position: relative;
+    top:225px;
+    left:475px; */
+    position: absolute;
+    bottom: -100px;
+    
+}
+
+.positioned img{
+    margin: 0px auto;
+}
+
+.about-img{
+    overflow: hidden;
+    height: 750px;
+}
+
+.portfolio-item{
+    overflow: hidden;
+}
+
+.portfolio-cats:hover{
+    cursor: pointer;
+}
