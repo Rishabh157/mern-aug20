@@ -40,3 +40,19 @@
 .portfolio-cats:hover{
     cursor: pointer;
 }
+
+.portfolio-active{
+    background-color: #777;
+}
+
+
+
+.mydiv{
+    width: 250px;
+    height: 250px;
+    border:1px solid black;
+}
+
+.bg-red{
+    background-color: red;
+}

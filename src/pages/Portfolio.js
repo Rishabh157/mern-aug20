@@ -29,17 +29,17 @@ export default class Portfolio extends Component {
                 <Header />
                 <hr/>
                 <ul className="list-unstyled d-flex justify-content-between px-5 portfolio-cats">
-                    <li className="list-unstyled-item" onClick={
+                    <li className={"list-unstyled-item", this.state.filter == "mobile" ? "portfolio-active" : ""} onClick={
                         ()=>{
                             this.setState({filter:"mobile"})
                         }
                     }>Mobile</li>
-                    <li className="list-unstyled-item"
+                    <li className={"list-unstyled-item", this.state.filter == "web" ? "portfolio-active" : ""}
                     onClick={()=>{
                         this.setState({filter:"web"})
                     }}
                     >Website</li>
-                    <li className="list-unstyled-item" onClick={()=>{
+                    <li className={"list-unstyled-item", this.state.filter == "iot" ? "portfolio-active" : ""} onClick={()=>{
                         this.setState({filter:"iot"})
                     }}>IOT</li>
                 </ul>
