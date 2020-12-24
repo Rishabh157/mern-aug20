@@ -17,15 +17,6 @@ export default class Balancesheet extends Component {
 
     getCalculation = () => {
         let txns = [...this.state.transactions]
-        // let incomes = txns.filter((el)=>el.type=="income")
-        // let expenses = txns.filter((el)=>el.type=="expense")
-
-        // console.table(incomes)
-        // console.table(expenses)
-
-        // let sumOfInc = incomes.reduce((el1, el2)=>el1.amount+el2.amount)
-        // let sumOfExp = expenses.reduce((el1, el2)=>el1.amount+el2.amount)
-
         let inc = 0;
         let exp = 0;
         txns.forEach(e => {
@@ -35,22 +26,33 @@ export default class Balancesheet extends Component {
                 exp += e.amount
             }
         })
-
         return {
             "income": inc,
             "expense": exp,
             "balance": inc - exp
         }
-
     }
 
     saveTxns = ()=>{
         let {amount, type, remark} = this.state
-        console.log(this.state)
-        let txn = { amount:parseInt(amount), type, remark}
-        let txns = [...this.state.transactions]
-        txns.push(txn)
-        this.setState({transactions:txns, amount:"", type:"income", remark:""})
+
+        if(amount != ""){
+            if(type == "expense"){
+                amount = parseInt(amount)
+                let balance = this.getCalculation().balance
+                if(amount > balance){
+                    alert("invalid transaction")
+                    return
+                }                
+            }
+
+            let txn = { amount:parseInt(amount), type, remark}
+            let txns = [...this.state.transactions]
+            txns.push(txn)
+            this.setState({transactions:txns, amount:"", type:"income", remark:""})
+        }
+        
+        
     }
 
 
