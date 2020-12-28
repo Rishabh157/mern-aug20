@@ -6,7 +6,7 @@ export default class Lifecycle extends Component {
         console.log("Lifecycle ::: Constructor")
         this.state = {
             data:[],
-            isLoading:true
+            isLoading:true,
         }
 
         //init state 
@@ -40,7 +40,28 @@ export default class Lifecycle extends Component {
         //loader disable
     }
 
-    
+
+    static getDerivedStateFromProps(props, state){        
+        console.log("Lifecycle :: getDerivedStateFromProps")     
+        return null
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        console.log("Lifecycle ::: shouldComponentUpdate")
+        return true
+    }
+
+    getSnapshotBeforeUpdate(prevProp, preState){
+        console.log("Lifecycle ::: getSnapshotBeforeUpdate")
+    }
+
+    componentDidUpdate(){
+        console.log("Lifecycle ::: Component did update")
+    }
+
+    componentWillUnmount(){
+        console.log("Lifecycle ::: Component will unmount")
+    }
     
     
 
