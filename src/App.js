@@ -5,6 +5,7 @@ import Addportfolio from './pages/Addportfolio'
 import Balancesheet from './pages/Balancesheet'
 import Lifecycle from './pages/Lifecycle'
 import Childcom from './pages/Childcom'
+import Posts from './pages/Posts'
 import './assets/css/style.css'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -55,13 +56,14 @@ componentWillUnmount(){
     console.log("Parent(App) :: render")        
 
     return (
-      <>
-      {this.state.isDisplay ? <Childcom count={this.state.count}/> : null}
-      <button onClick={this.handleCounter}>Increse Counter</button>
-      <button onClick={()=>{
-        this.setState({isDisplay:false})
-      }}>Hide Counter</button>
-      </>
+      <Posts/>
+      // <>
+      // {this.state.isDisplay ? <Childcom count={this.state.count}/> : null}
+      // <button onClick={this.handleCounter}>Increse Counter</button>
+      // <button onClick={()=>{
+      //   this.setState({isDisplay:false})
+      // }}>Hide Counter</button>
+      // </>
     )
   }
 
