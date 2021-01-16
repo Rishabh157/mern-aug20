@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default class Balancesheet extends Component {
     constructor(props) {
@@ -34,7 +36,7 @@ export default class Balancesheet extends Component {
     }
 
     saveTxns = ()=>{
-        let {amount, type, remark} = this.state
+        let {amount, type, remark, userid} = this.state
 
         if(amount != ""){
             if(type == "expense"){
@@ -49,15 +51,11 @@ export default class Balancesheet extends Component {
             let txn = { amount:parseInt(amount), type, remark}
             let txns = [...this.state.transactions]
             txns.push(txn)
-            this.setState({transactions:txns, amount:"", type:"income", remark:""})
-        }
-        
+            let txnToSave = {amount,  type, remark, userid}
+            axios.post("http://localhost:8083/transaction", txnToSave)
+        }       
         
     }
-
-
-
-
 
     render() {
         let calc = this.getCalculation()
@@ -147,7 +145,24 @@ export default class Balancesheet extends Component {
                         </table>
                     </div>
                 </div>
+                <ToastContainer
+                    position="bottom-center"                    
+                />
             </div>
         )
+    }
+
+    async componentDidMount(){
+        let token = await localStorage.getItem("token")
+        this.setState({userid:token})
+        console.log("user ID is : ", token)
+        axios.post("http://localhost:8083/get-transactions", {"userid":token}).then(res=>{
+            this.setState({transactions:res.data.data})            
+        }).catch(err=>{
+            toast(err)
+        })
+
+
+
     }
 }

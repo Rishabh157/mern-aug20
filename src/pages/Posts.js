@@ -28,7 +28,6 @@ export default class Posts extends Component {
             console.log("Response recieved")
             console.log(res.data)
             this.setState({posts:res.data})
-
         }).catch(err=>{
             console.log(err)
         })
