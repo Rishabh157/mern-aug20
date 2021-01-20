@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 export default class Balancesheet extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             amount: "",
             type: "income",
