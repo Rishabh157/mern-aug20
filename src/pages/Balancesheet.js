@@ -35,7 +35,7 @@ export default class Balancesheet extends Component {
     }
 
     saveTxns = ()=>{
-        let {amount, type, remark, userid} = this.state
+        let {amount, type, remark, token} = this.state
 
         if(amount != ""){
             if(type == "expense"){
@@ -50,8 +50,13 @@ export default class Balancesheet extends Component {
             let txn = { amount:parseInt(amount), type, remark}
             let txns = [...this.state.transactions]
             txns.push(txn)
-            let txnToSave = {amount,  type, remark, userid}
-            axios.post("http://localhost:8083/transaction", txnToSave)
+            let txnToSave = {amount,  type, remark, token}
+            axios.post("http://localhost:8083/transaction", txnToSave).then(data=>{
+                toast("Successfully Inserted")
+                this.getTransactions()
+            }).catch(err=>{
+                toast("Something went wrong")
+            })
         }       
         
     }
@@ -60,6 +65,9 @@ export default class Balancesheet extends Component {
         let calc = this.getCalculation()
         return (
             <div className="container">
+                <div className="text-right mt-3 text-primary"
+                onClick={() => this.logout()}
+                >logout</div>
                 <div className="row mt-5">
                     <div className="col-md-3">
                         <input
@@ -153,15 +161,21 @@ export default class Balancesheet extends Component {
 
     async componentDidMount(){
         let token = await localStorage.getItem("token")
-        this.setState({userid:token})
-        console.log("user ID is : ", token)
-        axios.post("http://localhost:8083/get-transactions", {"userid":token}).then(res=>{
+        this.setState({token})        
+        this.getTransactions()
+    }
+
+
+    getTransactions = ()=>{
+        axios.post("http://localhost:8083/get-transactions", {"token":this.state.token}).then(res=>{
             this.setState({transactions:res.data.data})            
         }).catch(err=>{
             toast(err)
         })
+    }
 
-
-
+    logout = ()=>{
+        localStorage.removeItem("token")
+        this.props.history.push('/')
     }
 }

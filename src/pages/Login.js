@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 
 
@@ -34,6 +35,8 @@ export default class Login extends Component {
                         />
 
                         <button className="btn btn-primary btn-block mt-5" onClick={() => this.login()}>Login</button>
+
+                        Not registered? <Link to="/register">Register here</Link>
                     </div>
                 </div>
 
@@ -63,8 +66,14 @@ export default class Login extends Component {
         }).catch(err=>{
             toast("Check Internet connection")
         })
+    }
 
 
+    async componentDidMount(){
+        let token = await localStorage.getItem("token")
+        if(token != undefined){
+            this.props.history.push('/balance')
+        }
     }
 }
 

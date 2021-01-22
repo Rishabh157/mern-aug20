@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Portfolio from './pages/Portfolio'
 import Addportfolio from './pages/Addportfolio'
 import Balancesheet from './pages/Balancesheet'
+import Register from './pages/Register'
 import Lifecycle from './pages/Lifecycle'
 import Childcom from './pages/Childcom'
 import Posts from './pages/Posts'
@@ -23,6 +24,7 @@ export default class App extends Component {
       <Router>
         <Route path="/" component={Login} exact/>        
         <Route path="/balance" component={Balancesheet} />                
+        <Route path="/register" component={Register} />                
       </Router>
     )
   }
